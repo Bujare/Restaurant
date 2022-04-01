@@ -199,7 +199,7 @@ https://templatemo.com/tm-558-klassy-cafe
     </section>
     <!-- ***** About Area Ends ***** -->
 
-    @include("foodmenu")
+    @include("food")
 
     <!-- ***** Chefs Area Starts ***** -->
     <section class="section" id="chefs">

@@ -19,4 +19,6 @@ class AdminController extends Controller
         $data->delete();
         return redirect()->back();
     }
+
+
 }
