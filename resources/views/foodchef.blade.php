@@ -1,5 +1,5 @@
-<!-- ***** Chefs Area Starts ***** -->
-<section class="section" id="chefs">
+ <!-- ***** Chefs Area Starts ***** -->
+    <section class="section" id="chefs">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 offset-lg-4 text-center">

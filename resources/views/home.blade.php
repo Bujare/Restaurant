@@ -19,7 +19,9 @@
 <!--
     
 TemplateMo 558 Klassy Cafe
+
 https://templatemo.com/tm-558-klassy-cafe
+
 -->
     <!-- Additional CSS Files -->
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
@@ -598,6 +600,7 @@ https://templatemo.com/tm-558-klassy-cafe
     <!-- Global Init -->
     <script src="assets/js/custom.js"></script>
     <script>
+
         $(function() {
             var selectedClass = "";
             $("p").click(function(){
@@ -611,6 +614,7 @@ https://templatemo.com/tm-558-klassy-cafe
                 
             });
         });
+
     </script>
 
 

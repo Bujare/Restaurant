@@ -22,6 +22,7 @@
         <x-jet-banner />
 
         <div class="">
+            
             @livewire('navigation-menu')
 
             <!-- Page Heading -->

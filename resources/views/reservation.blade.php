@@ -1,5 +1,5 @@
-<!-- ***** Reservation Us Area Starts ***** -->
-<section class="section" id="reservation">
+ <!-- ***** Reservation Us Area Starts ***** -->
+    <section class="section" id="reservation">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 align-self-center">
