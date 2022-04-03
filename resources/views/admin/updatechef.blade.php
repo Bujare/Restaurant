@@ -9,7 +9,7 @@
 
   	<base href="/public">
    
-   @include("admin.admincss")
+   @include("admin.css")
    
   </head>
   <body>
@@ -69,7 +69,7 @@
   
   </div>
 
-   @include("admin.adminscript")
+   @include("admin.script")
 
 
   </body>
