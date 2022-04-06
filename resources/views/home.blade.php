@@ -315,8 +315,8 @@ https://templatemo.com/tm-558-klassy-cafe
                                                 <div class="left-list">
                                                     <div class="col-lg-12">
                                                         <div class="tab-item">
-                                                            <img src="assets/images/tab-item-01.png" alt="">
-                                                            <h4>Fresh Chicken Salad</h4>
+                                                            <img src="assets/images/salad.jfif" alt="">
+                                                            <h4>Chicken Salad</h4>
                                                             <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing elit, sed do.</p>
                                                             <div class="price">
                                                                 <h6>$5.50</h6>
@@ -351,8 +351,8 @@ https://templatemo.com/tm-558-klassy-cafe
                                                 <div class="right-list">
                                                     <div class="col-lg-12">
                                                         <div class="tab-item">
-                                                            <img src="assets/images/tab-item-04.png" alt="">
-                                                            <h4>Eggs Omelette</h4>
+                                                            <img src="assets/images/omlet.jpg" alt="">
+                                                            <h4>Omlet</h4>
                                                             <p>Lorem ipsum dolor sit amet, consectetur koit adipiscing elit, sed do.</p>
                                                             <div class="price">
                                                                 <h6>$7.50</h6>
@@ -561,7 +561,7 @@ https://templatemo.com/tm-558-klassy-cafe
                 </div>
                 <div class="col-lg-4">
                     <div class="logo">
-                        <a href="index.html"><img src="assets/images/white-logo.png" alt=""></a>
+                        <a href="/"><img src="assets/images/white-logo.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-xs-12">

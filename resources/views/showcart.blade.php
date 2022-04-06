@@ -67,8 +67,8 @@ https://templatemo.com/tm-558-klassy-cafe
                 <div class="col-12">
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
-                        <a href="index.html" class="logo">
-                            <img src="assets/images/klassy-logo.png" align="klassy cafe html template">
+                        <a href="/" class="logo">
+                            <!-- <img src="assets/images/klassy-logo.png" align="klassy cafe html template"> -->
 
 
                             <a  class='menu-trigger'>
@@ -182,7 +182,7 @@ https://templatemo.com/tm-558-klassy-cafe
 <div  id="top" style="overflow-x: hidden;">
 
 
-    <table align="center" bgcolor="yellow">
+    <table align="center" bgcolor="grey">
     	
 
     	<tr>
@@ -232,7 +232,7 @@ https://templatemo.com/tm-558-klassy-cafe
             <tr style="position: relative; top: -80px; left:360px;">
 
              <td>
-                 <a class="btn btn-warning" href="{{url('/remove',$data2->id)}}" >Remove</a>
+                 <a class="btn btn-danger" href="{{url('/remove',$data2->id)}}" >Remove</a>
              </td>
 
             </tr>
@@ -247,7 +247,7 @@ https://templatemo.com/tm-558-klassy-cafe
 
 <div align="center" style="padding: 10px;">
     
-<button class="btn btn-primary" type="button" id="order">Order Now</button>
+<button class="btn btn-success" type="button" id="order">Order Now</button>
 
 </div>
 
