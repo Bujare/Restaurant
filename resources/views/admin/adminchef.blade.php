@@ -63,11 +63,11 @@
   	<table bgcolor="black">
   		
   		<tr>
-  			<th style="padding:30px; ">Chef Name</th>
-  			<th style="padding:30px; ">Speciality</th>
-  			<th style="padding:30px; ">Image</th>
-  			<th style="padding:30px; ">Action</th>
-  			<th style="padding:30px; ">Action2</th>
+  			<th style="padding:20px; ">Chef Name</th>
+  			<th style="padding:20px; ">Speciality</th>
+  			<th style="padding:20px; ">Image</th>
+  			<th style="padding:20px; ">Action</th>
+  			<th style="padding:20px; ">Action2</th>
 
   		</tr>
 
