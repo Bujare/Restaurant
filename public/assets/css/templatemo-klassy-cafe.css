@@ -103,8 +103,9 @@ ul {
 }
 
 p {
-  font-size: 14px;
-  line-height: 25px;
+  font-size: 16px;
+  font-family: 'Dancing Script', cursive;
+  /* line-height: 25px; */
   color: #2a2a2a;
 }
 
@@ -657,7 +658,7 @@ banner
 }
 
 #top .left-content {
-  background-image: url(../images/top-left-bg.jpg);
+  background-image: url(../images/bground.jpg);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -1450,7 +1451,7 @@ offers
   right: 0;
   width: 70px;
   height: 70px;
-  background-color: #fb5849;
+  background-color: #fc6e62;
   display: inline-block;
   text-align: center;
   line-height: 70px;

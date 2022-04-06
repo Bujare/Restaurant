@@ -7,7 +7,7 @@
 <html lang="en">
   <head>
    
-   @include("admin.admincss")
+   @include("admin.css")
    
   </head>
   <body>
@@ -17,7 +17,7 @@
   	@include("admin.navbar")
 
 
-  	<div style="position: relative; top: 60px; right: -150px">
+  	<div style="position: relative; top: 80px; right: -250px">
   		
   		<form action="{{url('/uploadfood')}}" method="post" enctype="multipart/form-data">
 
@@ -58,12 +58,12 @@
         
         <table bgcolor="black">
           <tr>
-            <th style="padding: 30px">Food Name</th>
-            <th style="padding: 30px">Price</th>
-            <th style="padding: 30px">Description</th>
-            <th style="padding: 30px">Image</th>
-            <th style="padding: 30px">Action</th>
-          <th style="padding: 30px">Action2</th>
+            <th style="padding: 40px">Food Name</th>
+            <th style="padding: 40px">Price</th>
+            <th style="padding: 40px">Description</th>
+            <th style="padding: 40px">Image</th>
+            <th style="padding: 40px">Action</th>
+          <th style="padding: 40px">Action2</th>
             
           </tr>
 
@@ -109,7 +109,7 @@
 
 </div>
 
-   @include("admin.adminscript")
+   @include("admin.script")
 
 
   </body>

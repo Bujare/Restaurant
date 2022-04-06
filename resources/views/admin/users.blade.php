@@ -25,14 +25,14 @@
 
 
 
-  	<div  style="position: relative; top: 60px; right: -150px " >
+  	<div  style="position: relative; top: 100px; right: -250px " >
   		
-  		<table bgcolor="grey" border="3px" >
+  		<table bgcolor="grey" border="4px" >
   			
   			<tr>
-  				<th style="padding: 30px">Name</th>
-  				<th style="padding: 30px">Email</th>
-  				<th style="padding: 30px">Action</th>
+  				<th style="padding: 40px">Name</th>
+  				<th style="padding: 40px">Email</th>
+  				<th style="padding: 40px">Action</th>
   			</tr>
 
 
