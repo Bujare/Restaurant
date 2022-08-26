@@ -20,316 +20,172 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-      
+
 
   public function user()
-   {
-    $data=user::all();
-   	return view("admin.users",compact("data"));
+  {
+    $data = User::paginate(20);
+    return view("admin.users", compact("data"));
+  }
 
-   }
+  public function deleteuser(User $user)
+  {
+    $user->delete();
+    return redirect()->back();
+  }
 
-
-
-
-  public function deleteuser($id)
-   {
-
-   	$data=user::find($id);
-   	$data->delete();
-   	return redirect()->back();
-   }
-
-   public function deletemenu($id)
-   {
-
-    $data=food::find($id);
-
-    $data->delete();
+  public function deletemenu(Food $food)
+  {
+    $food->delete();
 
     return redirect()->back();
-
-   }
-
-
-   
-     public function foodmenu()
-   {
-
-   $data = food::all();
-    return view("admin.foodmenu",compact("data"));
-
-   }
-
-
-public function updateview($id)
-{
-
-  $data=food::find($id);
-  return view("admin.updateview",compact("data"));
-
-
-}
-
-public function update(Request $request , $id)
-{
-  $data=food::find($id);
-
-
-   $image=$request->image;
-
-
-   $imagename =time().'.'.$image->getClientOriginalExtension();
-
-            $request->image->move('foodimage',$imagename);
-
-            $data->image=$imagename;
-
-
-            $data->title=$request->title;
-
-            $data->price=$request->price;
-
-            $data->description=$request->description;
-
-            $data->save();
-
-            return redirect()->back();
-
-
-}
-
-
-
-
-     public function upload(Request $request)
-   {
-
-    $data = new food;
-
-
-   $image=$request->image;
-
-
-   $imagename =time().'.'.$image->getClientOriginalExtension();
-
-            $request->image->move('foodimage',$imagename);
-
-            $data->image=$imagename;
-
-
-            $data->title=$request->title;
-
-            $data->price=$request->price;
-
-            $data->description=$request->description;
-
-            $data->save();
-
-            return redirect()->back();
-
-
-           
-
-
-   }
-
-
-
-
-        public function reservation(Request $request)
-   {
-
-    $data = new reservation;
-
-
-  
-
-
-            $data->name=$request->name;
-
-            $data->email=$request->email;
-
-            $data->phone=$request->phone;
-
-            $data->guest=$request->guest;
-
-            $data->date=$request->date;
-
-            $data->time=$request->time;
-
-            $data->message=$request->message;
-
-            $data->save();
-
-            return redirect()->back() ->with('alert', 'Reserved!');
-
-
-           
-
-
-   }
-
-
-
-   public function viewreservation()
-   {
-
-   
-    if(Auth::id())
-    {
-
-    $data=reservation::all();
-
-    return view("admin.adminreservation",compact("data"));
-
   }
 
-  else
+
+
+  public function foodmenu()
+  {
+    $data = Food::paginate(20);
+    return view("admin.foodmenu", compact("data"));
+  }
+
+
+  public function updateview($id)
+  {
+    $food = Food::findOrFail($id);
+    return view("admin.updateview", ['data' => $food]);
+  }
+
+  public function update(Request $request, Food $food)
+  {
+    if($request->hasFile('image')){
+      $image = $request->image;
+      $imagename = time() . '.' . $image->getClientOriginalExtension();
+      $request->image->move('foodimage', $imagename);
+      $food->update(['image' => $imagename]);
+    }
+
+    $food->update([
+      'title' => $request->title,
+      'price' => $request->price,
+      'description' => $request->description
+    ]);
+
+    return redirect()->back();
+  }
+
+
+
+
+  public function upload(Request $request)
   {
 
-    return redirect('login');
+    $food = Food::create([
+      'title' => $request->title,
+      'price' => $request->price,
+      'description' => $request->description
+    ]);
+
+    if($request->hasFile('image')){
+      $image = $request->image;
+      $imagename = time() . '.' . $image->getClientOriginalExtension();
+      $request->image->move('foodimage', $imagename);
+      $food->update(['image' => $imagename]);
+    }
+
+    return redirect()->back();
   }
 
-    
 
 
 
-   }
+  public function reservation(Request $request)
+  {
+    Reservation::create($request->all());
 
+    return redirect()->back()->with('alert', 'Reserved!');
+  }
 
-public function viewchef()
-{
+  public function viewreservation()
+  {
+    $data = Reservation::latest()->paginate(20);
 
-$data=foodchef::all();
-  return view("admin.adminchef",compact("data"));
-}
+    return view("admin.adminreservation", compact("data"));
+  }
 
 
+  public function viewchef()
+  {
+    $data = Foodchef::latest()->paginate(20);
+    return view("admin.adminchef", compact("data"));
+  }
 
 
-public function uploadchef(Request $request)
 
 
-{
+  public function uploadchef(Request $request)
+  {
 
+    $foodchef = Foodchef::create([
+      'name' => $request->name,
+      'speciality' => $request->speciality
+    ]);
 
-  $data=new foodchef;
+    if($request->hasFile('image')){
+      $image = $request->image;
+      $imagename = time() . '.' . $image->getClientOriginalExtension();
+      $request->image->move('foodimage', $imagename);
+      $foodchef->update(['image' => $imagename]);
+    }
+    return redirect()->back();
+  }
 
-  $image=$request->image;
 
 
-    $imagename = time().'.'.$image->getClientOriginalExtension();
+  public function updatechef(Foodchef $food_chef)
+  {
+    return view("admin.updatechef", ['data' => $food_chef]);
+  }
 
-            $request->image->move('chefimage',$imagename);
+  public function updatefoodchef(Request $request, Foodchef $food_chef)
+  {
+    $food_chef->update([
+      'name' => $request->name,
+      'speciality' => $request->speciality
+    ]);
 
-            $data->image=$imagename;
+    if($request->hasFile('image')){
+      $image = $request->image;
+      $imagename = time() . '.' . $image->getClientOriginalExtension();
+      $request->image->move('foodimage', $imagename);
+      $food_chef->update(['image' => $imagename]);
+    }
 
+    return redirect()->back();
+  }
 
-            $data->name=$request->name;
 
-             $data->speciality=$request->speciality;
+  public function deletechef(Foodchef $food_chef)
+  {
+    $food_chef->delete();
+    return redirect()->back();
+  }
 
 
-             $data->save();
+  public function orders()
+  {
+    return view('admin.orders', ['data' => Order::latest()->paginate(20)]);
+  }
 
+  public function search(Request $request)
+  {
+    $orders = Order::query();
+    if($request->filled('search'))
+    {
+      $orders = $orders->where('name', 'Like', '%' . $request->search . '%')->orWhere('foodname', 'Like', '%' . $request->search . '%');
+    }
 
-             return redirect()->back();
-
-
-
-
-}
-
-
-
-public function updatechef($id)
-{
-
-  $data=foodchef::find($id);
-
-  return view("admin.updatechef",compact("data"));
-
-
-}
-
-
-
-
-public function updatefoodchef(Request $request ,$id)
-{
-
-  $data=foodchef::find($id);
-
-
-  $image=$request->image;
-
-      if ($image)
-       {
-
-      $imagename =time().'.'.$image->getClientOriginalExtension();
-
-                  $request->image->move('chefimage',$imagename);
-
-                  $data->image=$imagename;
-      }
-         
-
-
-            $data->name=$request->name;
-
-            $data->speciality=$request->speciality;
-
-
-            $data->save();
-
-            return redirect()->back();
-
-  
-
-
-}
-
-
-public function deletechef($id)
-{
-
-
-  $data=foodchef::find($id);
-
-  $data->delete();
-  return redirect()->back();
-}
-
-
-public function orders()
-{
-
-  $data=order::all();
-
-
-  return view('admin.orders',compact('data'));
-}
-
-
-
-
-public function search(Request $request)
-{
-
-  $search=$request->search;
-
-  $data=order::where('name','Like','%'.$search.'%')->orWhere('foodname','Like','%'.$search.'%')
-  ->get();
-
-
-  return view('admin.orders',compact('data'));
-}
-
-
-
-
-
-
-
+    $orders = $orders->get();
+    return view('admin.orders', ['data' => $orders]);
+  }
 }

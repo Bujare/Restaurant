@@ -23,19 +23,16 @@ use App\Http\Controllers\AdminController;
 Route::get("/",[HomeController::class,"index"]);
 
 
-Route::get("/redirects",[HomeController::class,"redirects"]);
-
-
 Route::get("/users",[AdminController::class,"user"]);
 
-Route::get("/deletemenu/{id}",[AdminController::class,"deletemenu"]);
+Route::get("/deletemenu/{food}",[AdminController::class,"deletemenu"]);
 
 Route::get("/foodmenu",[AdminController::class,"foodmenu"]);
 
 Route::post("/uploadfood",[AdminController::class,"upload"]);
 
 
-Route::get("/deleteuser/{id}",[AdminController::class,"deleteuser"]);
+Route::delete("/deleteuser/{user}", [AdminController::class,"deleteuser"]);
 
 
 Route::get("/updateview/{id}",[AdminController::class,"updateview"]);
@@ -51,7 +48,7 @@ Route::post("/update/{id}",[AdminController::class,"update"]);
 Route::post("/reservation",[AdminController::class,"reservation"]);
 
 
-Route::get("/viewreservation",[AdminController::class,"viewreservation"]);
+Route::get("/viewreservation",[AdminController::class,"viewreservation"])->middleware('auth');
 
 
 Route::get("/viewchef",[AdminController::class,"viewchef"]);
@@ -61,19 +58,19 @@ Route::post("/uploadchef",[AdminController::class,"uploadchef"]);
 
 
 
-Route::get("/updatechef/{id}",[AdminController::class,"updatechef"]);
+Route::get("/updatechef/{food_chef}",[AdminController::class,"updatechef"]);
 
 
-Route::post("/updatefoodchef/{id}",[AdminController::class,"updatefoodchef"]);
+Route::post("/updatefoodchef/{food_chef}",[AdminController::class,"updatefoodchef"]);
 
 
-Route::get("/deletechef/{id}",[AdminController::class,"deletechef"]);
+Route::get("/deletechef/{food_chef}",[AdminController::class,"deletechef"]);
 
 
 
-Route::post("/addcart/{id}",[HomeController::class,"addcart"]);
+Route::post("/addcart/{id}",[HomeController::class,"addcart"])->middleware(['auth', 'web']);
 
-Route::get("/showcart/{id}",[HomeController::class,"showcart"]);
+Route::get("/showcart/{id}",[HomeController::class,"showcart"])->middleware('auth');
 
 
 

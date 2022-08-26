@@ -20,181 +20,74 @@ class HomeController extends Controller
 {
     public function index()
     {
+        $usertype = auth()->check() ? auth()->user()->usertype : false;
 
-       if(Auth::id())
-
-       {
-
-        return redirect('redirects');
-
-       }
-
-       else
-
-        $data=food::all();
-
-        $data2=foodchef::all();
-
-
-    	return view("home",compact("data","data2"));
+        if ($usertype == '1') {
+            return view('admin.adminhome');
+        } else {
+            $data = Food::get();
+            $data2 = Foodchef::get();
+            $count = Cart::where('user_id', auth()->id())->count();
+            return view('home', compact('data', 'data2', 'count'));
+        }
     }
 
-
- 
 
     public function redirects()
     {
-    	$data=food::all();
-
-        $data2=foodchef::all();
-
-    	$usertype= Auth::user()->usertype;
-
-    	if($usertype=='1')
-    	{
-    		return view('admin.adminhome');
-    	}
-
-
-    	else
-    	{
-
-            $user_id=Auth::id();
-
-            $count=cart::where('user_id',$user_id)->count();
-
-
-
-    		return view('home',compact('data','data2','count'));
-    	}
+        return redirect('/');
     }
 
 
-    public function addcart(Request $request,$id)
+    public function addcart(Request $request, $id)
+    {
+        Cart::create([
+            'user_id' => auth()->id(),
+            'food_id' => $id,
+            'quantity' => $request->quantity
+        ]);
+
+        return redirect()->back();
+    }
+
+
+
+    public function showcart(Request $request, $id)
     {
 
+        $count = Cart::where('user_id', auth()->id())->count();
 
-        if(Auth::id())
-        {
+        $data = Cart::where('user_id', auth()->id())->join('food', 'carts.food_id', '=', 'food.id')->get();
 
-            $user_id=Auth::id();
-
-            $foodid=$id;
-
-            $quantity=$request->quantity;
-
-
-            $cart=new cart;
-
-            $cart->user_id=$user_id;
-
-            $cart->food_id=$foodid;
-
-            $cart->quantity=$quantity;
-
-            $cart->save();
-
-
-            return redirect()->back();
-        }
-
-        else
-        {
-
-            return redirect('/login');
-        }
-
-
+        return view('showcart', compact('count', 'data'));
     }
 
-    
 
-public function showcart(Request $request,$id)
-{
 
-$count=cart::where('user_id',$id)->count();
 
-       
-        if(Auth::id()==$id)
-        {
+    public function remove($id)
+    {
+        Cart::findOrFail($id)->delete();
 
-            $data2=cart::select('*')->where('user_id', '=' , $id)->get();
+        return redirect()->back();
+    }
 
-            $data=cart::where('user_id',$id)->join('food', 'carts.food_id', '=' , 'food.id')->get();
 
-            return view('showcart',compact('count','data','data2'));
+    public function orderconfirm(Request $request)
+    {
 
+        foreach ($request->foodname as $key => $foodname) {
+            Order::create([
+                'foodname' => $foodname,
+                'price' => $request->price[$key],
+                'quantity' => $request->quantity[$key],
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'address' => $request->address
+            ]);
         }
+        Cart::where('user_id', auth()->id())->delete();
 
-
-        else
-
-        {
-
-            return redirect()->back();
-        }
-        
-
-
-
-
-
-}
-
-
-
-
-public function remove($id)
-
-{
-
-    $data=cart::find($id);
-
-
-    $data->delete();
-
-
-    return redirect()->back();
-
-}
-
-
-public function orderconfirm(Request $request)
-{
-
-
-foreach($request->foodname as $key =>$foodname)
-
-{
-
-    $data=new order;
-
-    $data->foodname=$foodname;
-
-    $data->price=$request->price[$key];
-
-    $data->quantity=$request->quantity[$key];
-
-    $data->name=$request->name;
-
-    $data->phone=$request->phone;
-
-    $data->address=$request->address;
-
-
-    $data->save();
-
-
-}
-
-return redirect()->back();
-
-
-}
-
-
-
-
-
-
+        return redirect()->back();
+    }
 }
